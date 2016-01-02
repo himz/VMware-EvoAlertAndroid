@@ -11,9 +11,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vmware.evorack.evoalert.MainActivity"
     tools:showIn="@layout/activity_main">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <fragment android:name="com.vmware.evorack.evoalert.fragments.TrendingFragment"
+        android:id="@+id/trending_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_trending" />
+</LinearLayout>
 </RelativeLayout>

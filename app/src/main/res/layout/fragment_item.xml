@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal"
+android:minHeight="?android:attr/listPreferredItemHeight"
+android:gravity="center_vertical">
+
+<TextView
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:layout_width="wrap_content"
+    android:id="@+id/id"
+    android:layout_height="wrap_content"
+    android:layout_weight="1" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/upVotesCount"
+        android:text="0"
+        android:textAlignment="center"/>
+    <ImageView android:src="@drawable/upvotegreen"
+        android:layout_width="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_height="wrap_content"
+        android:clickable="true" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/downVotesCount"
+        android:text="0"
+        android:textAlignment="center"/>
+    <ImageView android:src="@drawable/upvotegrey"
+        android:layout_width="wrap_content"
+        android:id="@+id/imageViewDown"
+        android:layout_height="wrap_content"
+        android:clickable="true" android:rotation="180" />
+</LinearLayout>
+
+
+</LinearLayout>
