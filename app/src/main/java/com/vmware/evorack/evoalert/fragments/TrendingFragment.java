@@ -1,6 +1,7 @@
 package com.vmware.evorack.evoalert.fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vmware.evorack.evoalert.MainActivity;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.adapters.TrendingRecyclerViewAdapter;
 import com.vmware.evorack.evoalert.dummy.DummyContent;
@@ -82,21 +84,50 @@ public class TrendingFragment extends Fragment {
 
     /* Function to refresh the item list*/
     public void updateItemList() {
-        final String SERVER_URL = "http://localhost:8080/rest/get/alert";
+        final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
+       /* RestHandler restHandler = new RestHandler();*/
         String response = "";
-        RestHandler restHandler = new RestHandler();
-        //response = restHandler.getJsonData(SERVER_URL);
-        View ll = getView();
-        RecyclerView recyclerView = (RecyclerView)ll;
+        new RetrieveFeedTask().execute(SERVER_URL);
 
-        TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter)recyclerView.getAdapter();
-        DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem("26","content For 26", "details for 26");
-        adapter.addItem(newDummyItem);
-        adapter.notifyDataSetChanged();
 
     }
-    private void addItem(DummyContent.DummyItem item) {
 
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+
+        protected String doInBackground(String... urls) {
+            try {
+                final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
+                String response = "";
+                RestHandler restHandler = new RestHandler();
+                response = restHandler.getJsonData(SERVER_URL);
+                return response;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        protected void onPostExecute(final String response) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View ll = getView();
+                    RecyclerView recyclerView = (RecyclerView) ll;
+
+                    TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
+                    DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem(response, response, "details for 26");
+                    adapter.addItem(newDummyItem);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+
+            // TODO: check this.exception
+            // TODO: do something with the feed
+
+        }
     }
 
     /**
