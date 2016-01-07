@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            /*Code to refresh data in the fragment */
+                TrendingFragment trendingFrag = (TrendingFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.trending_fragment);
+                trendingFrag.updateItemList();
             }
         });
     }
@@ -55,6 +59,6 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
 
     @Override
     public void onTrendingFragmentInteraction(DummyContent.DummyItem item) {
-        
+
     }
 }

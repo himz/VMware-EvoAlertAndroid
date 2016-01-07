@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.adapters.TrendingRecyclerViewAdapter;
 import com.vmware.evorack.evoalert.dummy.DummyContent;
+import com.vmware.evorack.evoalert.network.RestHandler;
 
 
 /**
@@ -78,6 +79,18 @@ public class TrendingFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    /* Function to refresh the item list*/
+    public void updateItemList() {
+        final String SERVER_URL = "http://localhost:8080/rest/get/alert";
+        String response = "";
+        RestHandler restHandler = new RestHandler();
+        response = restHandler.getJsonData(SERVER_URL);
+        RecyclerView recyclerView = (RecyclerView)this.getView().findViewById(R.id.list);
+        TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter)recyclerView.getAdapter();
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
