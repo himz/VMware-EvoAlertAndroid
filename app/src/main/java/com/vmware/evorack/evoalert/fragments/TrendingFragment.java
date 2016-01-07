@@ -85,12 +85,19 @@ public class TrendingFragment extends Fragment {
         final String SERVER_URL = "http://localhost:8080/rest/get/alert";
         String response = "";
         RestHandler restHandler = new RestHandler();
-        response = restHandler.getJsonData(SERVER_URL);
-        RecyclerView recyclerView = (RecyclerView)this.getView().findViewById(R.id.list);
+        //response = restHandler.getJsonData(SERVER_URL);
+        View ll = getView();
+        RecyclerView recyclerView = (RecyclerView)ll;
+
         TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter)recyclerView.getAdapter();
+        DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem("26","content For 26", "details for 26");
+        adapter.addItem(newDummyItem);
+        adapter.notifyDataSetChanged();
 
     }
+    private void addItem(DummyContent.DummyItem item) {
 
+    }
 
     /**
      * This interface must be implemented by activities that contain this

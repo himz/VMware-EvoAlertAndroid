@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Going to send data to Trending Frag", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             /*Code to refresh data in the fragment */
                 TrendingFragment trendingFrag = (TrendingFragment)

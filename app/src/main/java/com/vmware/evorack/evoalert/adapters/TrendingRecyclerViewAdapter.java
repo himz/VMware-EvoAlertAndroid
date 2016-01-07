@@ -76,4 +76,9 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
             return super.toString() + "'";
         }
     }
+
+    public void addItem(DummyContent.DummyItem item) {
+        mValues.add(item);
+    }
+
 }
