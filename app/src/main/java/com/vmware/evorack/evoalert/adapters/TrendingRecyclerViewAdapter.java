@@ -78,7 +78,12 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
     }
 
     public void addItem(DummyContent.DummyItem item) {
-        mValues.add(item);
+        mValues.add(0,item);
     }
+
+    public void clearList() {
+        mValues.clear();
+    }
+
 
 }

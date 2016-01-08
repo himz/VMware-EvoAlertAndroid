@@ -11,11 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vmware.evorack.evoalert.MainActivity;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.adapters.TrendingRecyclerViewAdapter;
 import com.vmware.evorack.evoalert.dummy.DummyContent;
 import com.vmware.evorack.evoalert.network.RestHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -84,25 +90,27 @@ public class TrendingFragment extends Fragment {
 
     /* Function to refresh the item list*/
     public void updateItemList() {
-        final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
+        final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
        /* RestHandler restHandler = new RestHandler();*/
         String response = "";
-        new RetrieveFeedTask().execute(SERVER_URL);
+        //new RetrieveLatestAlert().execute(SERVER_URL);
+        new GetAllAlert().execute(SERVER_URL);
 
 
     }
 
 
-    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
+    class RetrieveLatestAlert extends AsyncTask<String, Void, String> {
 
         private Exception exception;
 
         protected String doInBackground(String... urls) {
+            String url = urls[0];
             try {
                 final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
                 String response = "";
                 RestHandler restHandler = new RestHandler();
-                response = restHandler.getJsonData(SERVER_URL);
+                response = restHandler.getJsonData(url);
                 return response;
             } catch (Exception e) {
                 this.exception = e;
@@ -129,6 +137,61 @@ public class TrendingFragment extends Fragment {
 
         }
     }
+
+
+    class GetAllAlert extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+
+        protected String doInBackground(String... urls) {
+            String url = urls[0];
+            try {
+                final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
+                String response = "";
+                RestHandler restHandler = new RestHandler();
+                response = restHandler.getJsonData(url);
+                return response;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        protected void onPostExecute(final String response) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View ll = getView();
+                    RecyclerView recyclerView = (RecyclerView) ll;
+                    try {
+                        JSONArray ja = new JSONArray(response);
+
+                        // Create a  list of dummy itesm
+                        List<DummyContent.DummyItem> di = new ArrayList<DummyContent.DummyItem>();
+                        DummyContent.DummyItem tempDummyItem = new DummyContent.DummyItem("26","Content 26","Details 26");
+                        di.add(tempDummyItem);
+                        for(int i = 0; i < ja.length(); i++){
+                            di.add(new DummyContent.DummyItem(ja.getJSONObject(i).toString(),"asdf", "sadfasd"));
+                        }
+
+                        TrendingRecyclerViewAdapter adapter = new TrendingRecyclerViewAdapter(di, mListener);
+                        ((RecyclerView) ll).setAdapter(adapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
+                    DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem("27", "27", "details for 26");
+                    adapter.addItem(newDummyItem);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+
+            // TODO: check this.exception
+            // TODO: do something with the feed
+
+        }
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
