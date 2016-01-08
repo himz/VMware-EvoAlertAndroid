@@ -18,9 +18,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13f5b998-883a-4e91-99e2-7f9ccd2a315d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/network/RestHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/network/RestHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/adapters/TrendingRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/adapters/TrendingRecyclerViewAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="EvoAlert.iws" />
@@ -140,15 +138,14 @@
       <file leaf-file-name="TrendingFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.033333335">
-              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7">
+              <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4124#4685#0" expanded="true" />
                 <element signature="e#4684#4685#0" expanded="true" />
-                <element signature="e#5510#6972#0" expanded="true" />
-                <element signature="e#5916#5940#0" expanded="true" />
-                <element signature="e#6971#6972#0" expanded="true" />
+                <element signature="e#5510#7351#0" expanded="true" />
+                <element signature="e#7350#7351#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1740,8 +1737,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/network/RestHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/adapters/TrendingRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java" />
       </list>
     </option>
   </component>
@@ -2292,9 +2289,8 @@
             <element signature="imports" expanded="true" />
             <element signature="e#4124#4685#0" expanded="true" />
             <element signature="e#4684#4685#0" expanded="true" />
-            <element signature="e#5510#6972#0" expanded="true" />
-            <element signature="e#5916#5940#0" expanded="true" />
-            <element signature="e#6971#6972#0" expanded="true" />
+            <element signature="e#5510#7351#0" expanded="true" />
+            <element signature="e#7350#7351#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2527,15 +2523,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vmware/evorack/evoalert/fragments/TrendingFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.033333335">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7">
+          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4124#4685#0" expanded="true" />
             <element signature="e#4684#4685#0" expanded="true" />
-            <element signature="e#5510#6972#0" expanded="true" />
-            <element signature="e#5916#5940#0" expanded="true" />
-            <element signature="e#6971#6972#0" expanded="true" />
+            <element signature="e#5510#7351#0" expanded="true" />
+            <element signature="e#7350#7351#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -165,17 +165,21 @@ public class TrendingFragment extends Fragment {
                     RecyclerView recyclerView = (RecyclerView) ll;
                     try {
                         JSONArray ja = new JSONArray(response);
-
-                        // Create a  list of dummy itesm
-                        List<DummyContent.DummyItem> di = new ArrayList<DummyContent.DummyItem>();
                         DummyContent.DummyItem tempDummyItem = new DummyContent.DummyItem("26","Content 26","Details 26");
-                        di.add(tempDummyItem);
+                        TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
+                        adapter.clearList();
+                        adapter.addItem(tempDummyItem);
+                        for(int i =0; i < ja.length(); i++) {
+                            adapter.addItem(new DummyContent.DummyItem(ja.getJSONObject(i).toString(),"asdf", "sadfasd"));
+                        }
+/*                      This code is to replace the current adapter -- which is an overkill
                         for(int i = 0; i < ja.length(); i++){
                             di.add(new DummyContent.DummyItem(ja.getJSONObject(i).toString(),"asdf", "sadfasd"));
                         }
-
+                        adapter.notifyDataSetChanged();
+/*
                         TrendingRecyclerViewAdapter adapter = new TrendingRecyclerViewAdapter(di, mListener);
-                        ((RecyclerView) ll).setAdapter(adapter);
+                        ((RecyclerView) ll).setAdapter(adapter);*/
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
