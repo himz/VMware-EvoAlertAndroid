@@ -11,17 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vmware.evorack.evoalert.utils.App;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.adapters.TrendingRecyclerViewAdapter;
-import com.vmware.evorack.evoalert.dummy.DummyContent;
+import com.vmware.evorack.evoalert.model.AlertItem;
+import com.vmware.evorack.evoalert.model.DummyContent;
 import com.vmware.evorack.evoalert.network.RestHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -74,7 +73,7 @@ public class TrendingFragment extends Fragment {
         if (context instanceof OnTrendingFragmentInteractionListener) {
             mListener = (OnTrendingFragmentInteractionListener) context;
             // Send the event to the host activity
-            mListener.onTrendingFragmentInteraction(new DummyContent.DummyItem("1trending", "content1trending", "details1"));
+            mListener.onTrendingFragmentInteraction(new AlertItem("1trending", "content1trending", "details1"));
 
         } else {
             throw new RuntimeException(context.toString()
@@ -91,6 +90,7 @@ public class TrendingFragment extends Fragment {
     /* Function to refresh the item list*/
     public void updateItemList() {
         final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
+        //final String SERVER_URL = "http://10.160.109.11:8080/rest/get/alerts";
        /* RestHandler restHandler = new RestHandler();*/
         String response = "";
         //new RetrieveLatestAlert().execute(SERVER_URL);
@@ -107,7 +107,9 @@ public class TrendingFragment extends Fragment {
         protected String doInBackground(String... urls) {
             String url = urls[0];
             try {
-                final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
+                //final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alert";
+                //final String SERVER_URL = "http://10.160.109.11:8080/rest/get/alerts";
+
                 String response = "";
                 RestHandler restHandler = new RestHandler();
                 response = restHandler.getJsonData(url);
@@ -126,8 +128,8 @@ public class TrendingFragment extends Fragment {
                     RecyclerView recyclerView = (RecyclerView) ll;
 
                     TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
-                    DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem(response, response, "details for 26");
-                    adapter.addItem(newDummyItem);
+                    AlertItem newAlertItem = new AlertItem(response, response, "details for 26");
+                    adapter.addItem(newAlertItem);
                     adapter.notifyDataSetChanged();
                 }
             });
@@ -146,7 +148,8 @@ public class TrendingFragment extends Fragment {
         protected String doInBackground(String... urls) {
             String url = urls[0];
             try {
-                final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
+                //final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
+                System.out.println("Using url" + url);
                 String response = "";
                 RestHandler restHandler = new RestHandler();
                 response = restHandler.getJsonData(url);
@@ -158,34 +161,43 @@ public class TrendingFragment extends Fragment {
         }
 
         protected void onPostExecute(final String response) {
+            if(response == null)
+                return;
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     View ll = getView();
                     RecyclerView recyclerView = (RecyclerView) ll;
                     try {
+                        System.out.println(response);
+                        App.globalAlertJsonString = response;
                         JSONArray ja = new JSONArray(response);
-                        DummyContent.DummyItem tempDummyItem = new DummyContent.DummyItem("26","Content 26","Details 26");
+                        for(int i =0; i < ja.length(); i++) {
+                            App.globalAlertJsonObjectList.add(ja.getJSONObject(i));
+                        }
+                        // Create alertItem list from the global alert json object list
+                        for (JSONObject jo : App.globalAlertJsonObjectList) {
+
+                        }
+
+                        // clear current adapter
+
+
+                        // Add all the alerts from the the alert item list to the adapter
                         TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
                         adapter.clearList();
-                        adapter.addItem(tempDummyItem);
-                        for(int i =0; i < ja.length(); i++) {
-                            adapter.addItem(new DummyContent.DummyItem(ja.getJSONObject(i).toString(),"asdf", "sadfasd"));
+                        AlertItem tempAlertItem = new AlertItem("26","Content 26","Details 26");
+                        for (JSONObject jo : App.globalAlertJsonObjectList) {
+                            adapter.addItem(new AlertItem(jo.toString(),"asdf", "sadfasd"));
                         }
-/*                      This code is to replace the current adapter -- which is an overkill
-                        for(int i = 0; i < ja.length(); i++){
-                            di.add(new DummyContent.DummyItem(ja.getJSONObject(i).toString(),"asdf", "sadfasd"));
-                        }
-                        adapter.notifyDataSetChanged();
-/*
-                        TrendingRecyclerViewAdapter adapter = new TrendingRecyclerViewAdapter(di, mListener);
-                        ((RecyclerView) ll).setAdapter(adapter);*/
+                        adapter.addItem(tempAlertItem);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
-                    DummyContent.DummyItem newDummyItem = new DummyContent.DummyItem("27", "27", "details for 26");
-                    adapter.addItem(newDummyItem);
+                    AlertItem newAlertItem = new AlertItem("27", "27", "details for 26");
+                    adapter.addItem(newAlertItem);
                     adapter.notifyDataSetChanged();
                 }
             });
@@ -209,6 +221,6 @@ public class TrendingFragment extends Fragment {
      */
     public interface OnTrendingFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onTrendingFragmentInteraction(DummyContent.DummyItem item);
+        void onTrendingFragmentInteraction(AlertItem item);
     }
 }

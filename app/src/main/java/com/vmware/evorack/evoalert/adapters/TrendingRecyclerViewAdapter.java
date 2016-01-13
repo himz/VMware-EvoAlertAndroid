@@ -8,22 +8,22 @@ import android.widget.TextView;
 
 
 import com.vmware.evorack.evoalert.R;
-import com.vmware.evorack.evoalert.dummy.DummyContent;
+import com.vmware.evorack.evoalert.model.AlertItem;
 import com.vmware.evorack.evoalert.fragments.TrendingFragment;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyContent.DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link AlertItem} and makes a call to the
  * specified {@link TrendingFragment.OnTrendingFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    private final List<AlertItem> mValues;
     private final TrendingFragment.OnTrendingFragmentInteractionListener mListener;
 
-    public TrendingRecyclerViewAdapter(List<DummyContent.DummyItem> items, TrendingFragment.OnTrendingFragmentInteractionListener listener) {
+    public TrendingRecyclerViewAdapter(List<AlertItem> items, TrendingFragment.OnTrendingFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -62,7 +62,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
         public final View mView;
         public final TextView mIdView;
 
-        public DummyContent.DummyItem mItem;
+        public AlertItem mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -77,7 +77,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
         }
     }
 
-    public void addItem(DummyContent.DummyItem item) {
+    public void addItem(AlertItem item) {
         mValues.add(0,item);
     }
 

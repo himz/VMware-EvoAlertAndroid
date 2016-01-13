@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.vmware.evorack.evoalert.dummy.DummyContent;
+import com.vmware.evorack.evoalert.model.AlertItem;
+import com.vmware.evorack.evoalert.model.DummyContent;
 import com.vmware.evorack.evoalert.fragments.TrendingFragment;
 
 public class MainActivity extends AppCompatActivity implements TrendingFragment.OnTrendingFragmentInteractionListener{
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements TrendingFragment.
     }
 
     @Override
-    public void onTrendingFragmentInteraction(DummyContent.DummyItem item) {
+    public void onTrendingFragmentInteraction(AlertItem item) {
 
     }
 }
