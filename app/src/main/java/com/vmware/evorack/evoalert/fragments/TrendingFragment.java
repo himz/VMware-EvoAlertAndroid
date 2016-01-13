@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vmware.evorack.evoalert.utils.AlertHelperFunctions;
 import com.vmware.evorack.evoalert.utils.App;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.adapters.TrendingRecyclerViewAdapter;
@@ -169,26 +170,25 @@ public class TrendingFragment extends Fragment {
                     View ll = getView();
                     RecyclerView recyclerView = (RecyclerView) ll;
                     try {
+                        TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
                         System.out.println(response);
                         App.globalAlertJsonString = response;
                         JSONArray ja = new JSONArray(response);
+                        //Create global alertjson objectlist
                         for(int i =0; i < ja.length(); i++) {
                             App.globalAlertJsonObjectList.add(ja.getJSONObject(i));
                         }
+                        int counter = 0;
                         // Create alertItem list from the global alert json object list
-                        for (JSONObject jo : App.globalAlertJsonObjectList) {
-
-                        }
+                        App.globalAlertItemList = AlertHelperFunctions.getAlertItemList();
 
                         // clear current adapter
-
+                        adapter.clearList();
 
                         // Add all the alerts from the the alert item list to the adapter
-                        TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
-                        adapter.clearList();
                         AlertItem tempAlertItem = new AlertItem("26","Content 26","Details 26");
-                        for (JSONObject jo : App.globalAlertJsonObjectList) {
-                            adapter.addItem(new AlertItem(jo.toString(),"asdf", "sadfasd"));
+                        for (AlertItem ai : App.globalAlertItemList) {
+                            adapter.addItem(ai);
                         }
                         adapter.addItem(tempAlertItem);
 

@@ -76,7 +76,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
             return super.toString() + "'";
         }
     }
-
+    /* Add the latest item at the top -- stack */
     public void addItem(AlertItem item) {
         mValues.add(0,item);
     }
