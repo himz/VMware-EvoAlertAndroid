@@ -34,6 +34,7 @@ public class App extends Application {
     public static String  globalAlertJsonString;
     public static List<JSONObject> globalAlertJsonObjectList;
     public static List<AlertItem> globalAlertItemList;
+    public static int alertUniqueIdCounter;
 
 	@Override
 	public void onCreate() {
@@ -41,6 +42,7 @@ public class App extends Application {
 		Context ctx = getApplicationContext();
         globalAlertJsonObjectList = new ArrayList<JSONObject>();
         globalAlertItemList = new ArrayList<AlertItem>();
+        alertUniqueIdCounter = 0;
 	}
 
 	@Override

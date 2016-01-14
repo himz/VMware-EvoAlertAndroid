@@ -1,6 +1,7 @@
 package com.vmware.evorack.evoalert.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.vmware.evorack.evoalert.R;
 import com.vmware.evorack.evoalert.model.AlertItem;
 import com.vmware.evorack.evoalert.fragments.TrendingFragment;
+import com.vmware.evorack.evoalert.utils.App;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+        holder.mIdView.setText(mValues.get(position).getId());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

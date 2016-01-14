@@ -6,12 +6,13 @@ import java.sql.Timestamp;
  * Created by pandeyh on 1/12/2016.
  */
 public class AlertItem {
-    public String id;
-    public String content;
-    public String details;
-    public String alertName;
-    public Timestamp time;
-    public String location; //Start with storing hostname here.
+    String id;
+    String content;
+    String details;
+    String alertName;
+    Timestamp time;
+    String location; //Start with storing hostname here.
+    int uniqueId;
 
     public String getDetails() {
         return details;
@@ -76,6 +77,14 @@ public class AlertItem {
     public void setAlertName(String alertName) {
         this.alertName = alertName;
         this.id = alertName;
+    }
+
+    public int getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(int uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     @Override

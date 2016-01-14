@@ -1,6 +1,7 @@
 package com.vmware.evorack.evoalert.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.vmware.evorack.evoalert.utils.AlertHelperFunctions;
 import com.vmware.evorack.evoalert.utils.App;
@@ -26,7 +29,7 @@ import org.json.JSONObject;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
+ * <p>
  * Activities containing this fragment MUST implement the {@link OnTrendingFragmentInteractionListener}
  * interface.
  */
@@ -63,7 +66,10 @@ public class TrendingFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new TrendingRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
         }
+
+
         return view;
     }
 
@@ -73,9 +79,6 @@ public class TrendingFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnTrendingFragmentInteractionListener) {
             mListener = (OnTrendingFragmentInteractionListener) context;
-            // Send the event to the host activity
-            mListener.onTrendingFragmentInteraction(new AlertItem("1trending", "content1trending", "details1"));
-
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnTrendingFragmentInteractionListener");
@@ -162,7 +165,7 @@ public class TrendingFragment extends Fragment {
         }
 
         protected void onPostExecute(final String response) {
-            if(response == null)
+            if (response == null)
                 return;
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -175,7 +178,7 @@ public class TrendingFragment extends Fragment {
                         App.globalAlertJsonString = response;
                         JSONArray ja = new JSONArray(response);
                         //Create global alertjson objectlist
-                        for(int i =0; i < ja.length(); i++) {
+                        for (int i = 0; i < ja.length(); i++) {
                             App.globalAlertJsonObjectList.add(ja.getJSONObject(i));
                         }
                         int counter = 0;
@@ -186,7 +189,7 @@ public class TrendingFragment extends Fragment {
                         adapter.clearList();
 
                         // Add all the alerts from the the alert item list to the adapter
-                        AlertItem tempAlertItem = new AlertItem("26","Content 26","Details 26");
+                        AlertItem tempAlertItem = new AlertItem("26", "Content 26", "Details 26");
                         for (AlertItem ai : App.globalAlertItemList) {
                             adapter.addItem(ai);
                         }
@@ -201,10 +204,6 @@ public class TrendingFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 }
             });
-
-            // TODO: check this.exception
-            // TODO: do something with the feed
-
         }
     }
 
@@ -214,7 +213,7 @@ public class TrendingFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

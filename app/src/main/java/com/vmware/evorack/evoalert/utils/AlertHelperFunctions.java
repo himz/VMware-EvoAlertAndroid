@@ -82,8 +82,12 @@ public class AlertHelperFunctions {
             AlertItem alertItem;
             for (JSONObject messages:App.globalAlertJsonObjectList) {
                 alertItem = getAlertItemFromTheJsonObject(messages);
-                if (alertItem != null)
+                if (alertItem != null) {
+                    /* This is the only place when the item is being added to the list */
+                    /* add uniqueID to the current item */
+                    alertItem.setUniqueId(App.alertUniqueIdCounter++);
                     alertItemList.add(alertItem);
+                }
             }
         } catch (Exception e) {
             System.out.println("Error creating EventList from the response");
