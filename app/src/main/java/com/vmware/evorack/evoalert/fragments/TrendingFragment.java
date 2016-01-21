@@ -38,6 +38,12 @@ public class TrendingFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    private static final String LOCALHOST_SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
+    private static final String REAL_SERVER_URL = "http://10.160.109.11:8080/rest/get/alerts";
+
+    //Change debug mode to false for real server url
+    private static final boolean DEBUG_MODE = true;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnTrendingFragmentInteractionListener mListener;
@@ -93,12 +99,15 @@ public class TrendingFragment extends Fragment {
 
     /* Function to refresh the item list*/
     public void updateItemList() {
-        final String SERVER_URL = "http://10.0.2.2:8080/rest/get/alerts";
-        //final String SERVER_URL = "http://10.160.109.11:8080/rest/get/alerts";
+        String url;
+        if(DEBUG_MODE)
+            url = LOCALHOST_SERVER_URL;
+        else
+            url = REAL_SERVER_URL;
        /* RestHandler restHandler = new RestHandler();*/
         String response = "";
         //new RetrieveLatestAlert().execute(SERVER_URL);
-        new GetAllAlert().execute(SERVER_URL);
+        new GetAllAlert().execute(url);
 
 
     }
@@ -189,18 +198,18 @@ public class TrendingFragment extends Fragment {
                         adapter.clearList();
 
                         // Add all the alerts from the the alert item list to the adapter
-                        AlertItem tempAlertItem = new AlertItem("26", "Content 26", "Details 26");
+//                        AlertItem tempAlertItem = new AlertItem("26", "Content 26", "Details 26");
                         for (AlertItem ai : App.globalAlertItemList) {
                             adapter.addItem(ai);
                         }
-                        adapter.addItem(tempAlertItem);
+                      //  adapter.addItem(tempAlertItem);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     TrendingRecyclerViewAdapter adapter = (TrendingRecyclerViewAdapter) recyclerView.getAdapter();
-                    AlertItem newAlertItem = new AlertItem("27", "27", "details for 26");
-                    adapter.addItem(newAlertItem);
+  //                  AlertItem newAlertItem = new AlertItem("27", "27", "details for 26");
+    //                adapter.addItem(newAlertItem);
                     adapter.notifyDataSetChanged();
                 }
             });

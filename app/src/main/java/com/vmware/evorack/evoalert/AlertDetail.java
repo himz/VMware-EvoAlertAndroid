@@ -32,11 +32,14 @@ public class AlertDetail extends AppCompatActivity {
         TextView txtAlertHostName = (TextView) findViewById(R.id.txtAlertHostName);
         TextView txtAlertLocation = (TextView) findViewById(R.id.txtAlertLocation);
         TextView txtAlertTime = (TextView) findViewById(R.id.txtAlertTime);
-
-        txtAlertName.setText(ai.getAlertName());
-        txtAlertDescription.setText(ai.getDetails());
-        txtAlertHostName.setText(ai.getLocation());
-        txtAlertLocation.setText(ai.getLocation());
+        if(ai.getAlertName() != null)
+            txtAlertName.setText(ai.getAlertName());
+        if(ai.getDetails() != null)
+            txtAlertDescription.setText(ai.getDetails());
+        if(ai.getLocation() != null)
+            txtAlertHostName.setText(ai.getLocation());
+        if(ai.getLocation() != null)
+            txtAlertLocation.setText(ai.getLocation());
         Timestamp ts = ai.getTime();
         Date date = new Date(ts.getTime());
         txtAlertTime.setText(date.toString());
